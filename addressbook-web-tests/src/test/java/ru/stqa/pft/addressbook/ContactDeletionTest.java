@@ -25,7 +25,7 @@ public class ContactDeletionTest {
     }
     
     @Test
-    public void ContactDeletionTest() {
+    public void testContactDeletion() {
         wd.get("http://localhost/addressbook/");
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
@@ -34,7 +34,7 @@ public class ContactDeletionTest {
         wd.findElement(By.name("pass")).clear();
         wd.findElement(By.name("pass")).sendKeys("secret");
         wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-        wd.findElement(By.id("4")).click();
+        wd.findElement(By.name("selected[]")).click();
         wd.findElement(By.xpath("//div[@id='content']/form[2]/div[2]/input")).click();
     }
     
