@@ -35,7 +35,7 @@ public class ContactCreationTest {
     public void testContactCreation() {
 
         addNewContact();
-        fillInContactData(new newContactData("name1", "name2", "12345", "email@email.com"));
+        fillInContactData(new NewContactData("name1", "name2", "12345", "email@email.com"));
         submitNewContact();
         returnToHomePage();
     }
@@ -48,7 +48,7 @@ public class ContactCreationTest {
         wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
     }
 
-    private void fillInContactData(newContactData newContactData) {
+    private void fillInContactData(NewContactData newContactData) {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
         wd.findElement(By.name("firstname")).sendKeys(newContactData.getFirstName());
