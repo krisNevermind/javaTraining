@@ -21,6 +21,8 @@ public class ContactModificationTest extends TestBase {
         app.getContactHelper().returnHome();
         List<NewContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
+
+        before.remove()
     }
 
 }
