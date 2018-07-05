@@ -3,13 +3,13 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class NewContactData {
-    private final String id;
+    private int id;
     private final String firstName;
     private final String lastName;
     private final String homePhoneNumber;
     private final String email;
 
-    public NewContactData(String id, String firstName, String lastName, String homePhoneNumber, String email) {
+    public NewContactData(int id, String firstName, String lastName, String homePhoneNumber, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -18,15 +18,19 @@ public class NewContactData {
     }
 
     public NewContactData(String firstName, String lastName, String homePhoneNumber, String email) {
-        this.id = null;
+        this.id = 0;
         this.firstName = firstName;
         this.lastName = lastName;
         this.homePhoneNumber = homePhoneNumber;
         this.email = email;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -59,7 +63,7 @@ public class NewContactData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         NewContactData that = (NewContactData) o;
-        return Objects.equals(id, that.id) &&
+        return id == that.id &&
                 Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName);
     }
