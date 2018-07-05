@@ -20,7 +20,7 @@ public class ContactDeletionTest extends TestBase {
         app.getWebDriver().switchTo().alert().accept();
         app.getContactHelper().returnHome();
         List<NewContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(), before.size() - 1);
+ //       Assert.assertEquals(after.size(), before.size() - 1);
 
         before.remove(before.size() - 1);
         Assert.assertEquals(after, before);
