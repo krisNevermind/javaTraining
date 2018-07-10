@@ -33,6 +33,8 @@ public class GroupCreationTest extends TestBase {
         after.sort(byId);
         Assert.assertEquals(before, after);
   //      Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+
+        MarcherAssert.assertThat();
     }
 
 }
