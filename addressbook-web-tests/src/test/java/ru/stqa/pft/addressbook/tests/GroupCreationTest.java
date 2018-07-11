@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
@@ -7,6 +9,9 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTest extends TestBase {
 
@@ -32,9 +37,8 @@ public class GroupCreationTest extends TestBase {
         before.sort(byId);
         after.sort(byId);
         Assert.assertEquals(before, after);
-  //      Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
-
-        MarcherAssert.assertThat();
+        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+        assertThat(after, equalTo(before));
     }
 
 }

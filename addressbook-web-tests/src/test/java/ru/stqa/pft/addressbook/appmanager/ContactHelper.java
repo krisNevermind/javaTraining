@@ -71,4 +71,11 @@ public class ContactHelper extends HelperBase {
     public void returnHome() {
         click(By.xpath("//a[text()='home']"));
     }
+
+    public void modifyContact(int index, NewContactData contact) {
+        openContactForEditing(index);
+        fillInContactData(contact);
+        submitContactModification();
+        returnHome();
+    }
 }
