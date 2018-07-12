@@ -8,6 +8,7 @@ import ru.stqa.pft.addressbook.model.NewContactData;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactModificationTest extends TestBase {
 
@@ -21,19 +22,21 @@ public class ContactModificationTest extends TestBase {
 
     @Test
     public void testContactModification(){
-        List<NewContactData> before = app.getContactHelper().getContactList();
-        int index = before.size() - 1;
-        NewContactData contact = new NewContactData().withId(before.get(index).getId()).withFirstName("name1").withLastName("name2").withHomePhoneNumber("12345").withEmail("email@email.com");
-        app.getContactHelper().modifyContact(index, contact);
-        List<NewContactData> after = app.getContactHelper().getContactList();
+        Set<NewContactData> before = app.getContactHelper().all();
+        NewContactData modifiedContact = before.iterator().next();
+ //       int index = before.size() - 1;
+        NewContactData contact = new NewContactData().withId(modifiedContact.getId()).withFirstName("name1").withLastName("name2").withHomePhoneNumber("12345").withEmail("email@email.com");
+        app.getContactHelper().modifyContact(contact);
+        Set<NewContactData> after = app.getContactHelper().all();
         Assert.assertEquals(after.size(), before.size());
 
-        before.remove(index);
+        before.remove(modifiedContact);
         before.add(contact);
-        Comparator<? super NewContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+/*        Comparator<? super NewContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
         before.sort(byId);
         after.sort(byId);
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+  */
         Assert.assertEquals(before, after);
     }
 
