@@ -79,17 +79,6 @@ public class GroupHelper extends HelperBase {
         return groups;
     }
 
-/*   public Set<GroupData> all() {
-        Set<GroupData> groups = new HashSet<GroupData>();
-        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-        for (WebElement element : elements) {
-            String name = element.getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            groups.add(new GroupData().withId(id).withName(name));
-        }
-        return groups;
-    }
-*/
     public Groups all() {
         Groups groups = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));

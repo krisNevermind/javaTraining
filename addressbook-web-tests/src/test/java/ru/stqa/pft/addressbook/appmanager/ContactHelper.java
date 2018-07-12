@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
 import java.util.ArrayList;
@@ -75,8 +76,8 @@ public class ContactHelper extends HelperBase {
         return contacts;
     }
 
-    public Set<NewContactData> all() {
-        Set<NewContactData> contacts = new HashSet<>();
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.findElement(By.xpath(".//td[@class='center']//input")).getAttribute("value"));
