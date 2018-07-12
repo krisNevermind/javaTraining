@@ -2,7 +2,6 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
 import java.util.Comparator;
@@ -15,7 +14,7 @@ public class ContactCreationTest extends TestBase {
     public void testContactCreation() {
 
         List<NewContactData> before = app.getContactHelper().getContactList();
-        app.getNavigationHelper().addNewContact();
+        app.goTo().addNewContact();
         NewContactData contact = new NewContactData("name1", "name2", "12345", "email@email.com");
         app.getContactHelper().createContact(contact);
         app.returnToHomePage();

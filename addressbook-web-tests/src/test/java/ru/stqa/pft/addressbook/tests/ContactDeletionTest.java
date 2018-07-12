@@ -12,7 +12,7 @@ public class ContactDeletionTest extends TestBase {
     @BeforeMethod
     public void ensurePreconditions(){
         if (! app.getContactHelper().isThereContact()){
-            app.getNavigationHelper().addNewContact();
+            app.goTo().addNewContact();
             app.getContactHelper().createContact(new NewContactData("name1", "name2", "12345", "email@email.com"));
         }
     }
