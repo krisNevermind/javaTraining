@@ -62,7 +62,7 @@ public class ContactHelper extends HelperBase {
             int id = Integer.parseInt(element.findElement(By.xpath(".//td[@class='center']//input")).getAttribute("value"));
             String lastName = element.findElement(By.xpath(".//td[2]")).getText();
             String firstName = element.findElement(By.xpath(".//td[3]")).getText();
-            NewContactData contact = new NewContactData(id, firstName, lastName, null, null);
+            NewContactData contact = new NewContactData().withId(id).withFirstName(firstName).withLastName(lastName);
             contacts.add(contact);
         }
         return contacts;

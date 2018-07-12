@@ -3,13 +3,13 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class NewContactData {
-    private int id;
-    private final String firstName;
-    private final String lastName;
-    private final String homePhoneNumber;
-    private final String email;
+    private int id = Integer.MAX_VALUE;
+    private String firstName;
+    private String lastName;
+    private String homePhoneNumber;
+    private String email;
 
-    public NewContactData(int id, String firstName, String lastName, String homePhoneNumber, String email) {
+  /*  public NewContactData(int id, String firstName, String lastName, String homePhoneNumber, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -24,13 +24,34 @@ public class NewContactData {
         this.homePhoneNumber = homePhoneNumber;
         this.email = email;
     }
-
+*/
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public NewContactData withId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public NewContactData withFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public NewContactData withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public NewContactData withHomePhoneNumber(String homePhoneNumber) {
+        this.homePhoneNumber = homePhoneNumber;
+        return this;
+    }
+
+    public NewContactData withEmail(String email) {
+        this.email = email;
+        return this;
     }
 
     public String getFirstName() {

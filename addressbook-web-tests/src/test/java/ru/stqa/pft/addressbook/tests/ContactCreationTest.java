@@ -15,7 +15,7 @@ public class ContactCreationTest extends TestBase {
 
         List<NewContactData> before = app.getContactHelper().getContactList();
         app.goTo().addNewContact();
-        NewContactData contact = new NewContactData("name1", "name2", "12345", "email@email.com");
+        NewContactData contact = new NewContactData().withFirstName("name1").withLastName("name2");
         app.getContactHelper().createContact(contact);
         app.returnToHomePage();
         List<NewContactData> after = app.getContactHelper().getContactList();
@@ -29,7 +29,6 @@ public class ContactCreationTest extends TestBase {
         }
   */
 
-        contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
         before.add(contact);
         Comparator<? super NewContactData> byId = (g1, g2) ->Integer.compare(g1.getId(), g2.getId());
         before.sort(byId);

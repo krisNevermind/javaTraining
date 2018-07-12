@@ -13,7 +13,7 @@ public class ContactDeletionTest extends TestBase {
     public void ensurePreconditions(){
         if (! app.getContactHelper().isThereContact()){
             app.goTo().addNewContact();
-            app.getContactHelper().createContact(new NewContactData("name1", "name2", "12345", "email@email.com"));
+            app.getContactHelper().createContact(new  NewContactData().withFirstName("name1").withLastName("name2"));
         }
     }
 
