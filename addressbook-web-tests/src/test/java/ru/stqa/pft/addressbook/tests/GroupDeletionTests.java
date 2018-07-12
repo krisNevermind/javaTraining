@@ -13,7 +13,7 @@ public class GroupDeletionTests extends TestBase {
     public void ensurePreconditions(){
         app.goTo().groupPage();
         if (app.group().list().size() == 0){
-            app.group().create(new GroupData("testGroup1", "testDataHeader", "testDataFooter"));
+            app.group().create(new GroupData().withName("testGroup1"));
         }
     }
 
@@ -24,7 +24,6 @@ public class GroupDeletionTests extends TestBase {
         app.group().delete(index);
         List<GroupData> after = app.group().list();
         Assert.assertEquals(after.size(), index);
-
         before.remove(index); //delete deleted group from the list
         Assert.assertEquals(before, after);
 
