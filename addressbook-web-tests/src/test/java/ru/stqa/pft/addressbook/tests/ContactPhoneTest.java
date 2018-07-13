@@ -21,6 +21,8 @@ public class ContactPhoneTest extends TestBase {
         assertThat(contact.getWorkPhone(), equalTo(cleaned(contactInfoFromEditForm.getWorkPhone())));
   */
         assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+        assertThat(contact.getAddress(), equalTo(withoutSpacesAddress(contactInfoFromEditForm.getAddress())));
+        assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
     }
 
     private String mergePhones(NewContactData contact) {
@@ -28,8 +30,21 @@ public class ContactPhoneTest extends TestBase {
             .stream().filter((s)-> !s.equals("")).map(ContactPhoneTest::cleaned).collect(Collectors.joining("\n"));
         }
 
+    private String mergeEmails(NewContactData contact) {
+        return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
+                .stream().filter((s) -> !s.equals("")).map(ContactPhoneTest::withoutSpacesEmail).collect(Collectors.joining("\n"));
+    }
+
     public static String cleaned(String phone) {
         return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+    }
+
+    public static String withoutSpacesEmail(String email) {
+        return email.replaceAll("\\s", "");
+    }
+
+    public static String withoutSpacesAddress(String address) {
+        return address.replaceAll("\\s", "");
     }
 
 }
