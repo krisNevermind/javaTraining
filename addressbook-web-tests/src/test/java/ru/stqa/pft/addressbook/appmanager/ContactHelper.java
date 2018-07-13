@@ -86,8 +86,10 @@ public class ContactHelper extends HelperBase {
             int id = Integer.parseInt(element.findElement(By.xpath(".//td[@class='center']//input")).getAttribute("value"));
             String lastName = element.findElement(By.xpath(".//td[2]")).getText();
             String firstName = element.findElement(By.xpath(".//td[3]")).getText();
-            String[] phones = element.findElement(By.xpath(".//td[6]")).getText().split("\n");
-            contactCache.add(new NewContactData().withId(id).withFirstName(firstName).withLastName(lastName).withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
+//            String[] phones = element.findElement(By.xpath(".//td[6]")).getText().split("\n");
+//            contactCache.add(new NewContactData().withId(id).withFirstName(firstName).withLastName(lastName).withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
+            String allPhones = element.findElement(By.xpath(".//td[6]")).getText();
+            contactCache.add(new NewContactData().withId(id).withFirstName(firstName).withLastName(lastName).withAllPhones(allPhones));
         }
         return new Contacts(contactCache);
     }
