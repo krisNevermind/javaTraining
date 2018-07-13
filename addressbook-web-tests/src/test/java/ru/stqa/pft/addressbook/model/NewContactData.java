@@ -6,25 +6,29 @@ public class NewContactData {
     private int id = Integer.MAX_VALUE;
     private String firstName;
     private String lastName;
-    private String homePhoneNumber;
+    private String homePhone;
+    private String mobilePhone;
+    private String workPhone;
     private String email;
 
-  /*  public NewContactData(int id, String firstName, String lastName, String homePhoneNumber, String email) {
+  /*  public NewContactData(int id, String firstName, String lastName, String homePhone, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.homePhoneNumber = homePhoneNumber;
+        this.homePhone = homePhone;
         this.email = email;
     }
 
-    public NewContactData(String firstName, String lastName, String homePhoneNumber, String email) {
+    public NewContactData(String firstName, String lastName, String homePhone, String email) {
         this.id = Integer.MAX_VALUE;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.homePhoneNumber = homePhoneNumber;
+        this.homePhone = homePhone;
         this.email = email;
     }
 */
+
+
     public int getId() {
         return id;
     }
@@ -44,8 +48,18 @@ public class NewContactData {
         return this;
     }
 
-    public NewContactData withHomePhoneNumber(String homePhoneNumber) {
-        this.homePhoneNumber = homePhoneNumber;
+    public NewContactData withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+
+    public NewContactData withMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+        return this;
+    }
+
+    public NewContactData withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
         return this;
     }
 
@@ -62,8 +76,8 @@ public class NewContactData {
         return lastName;
     }
 
-    public String getHomePhoneNumber() {
-        return homePhoneNumber;
+    public String getHomePhone() {
+        return homePhone;
     }
 
     public String getEmail() {
