@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
 import java.util.ArrayList;
@@ -58,6 +59,7 @@ public class ContactHelper extends HelperBase {
     public void createContact(NewContactData contact) {
         fillInContactData(contact);
         submitNewContact();
+        contactCache = null;
     }
 
     public boolean isThereContact() {
@@ -76,16 +78,21 @@ public class ContactHelper extends HelperBase {
         return contacts;
     }
 
+    public Contacts contactCache = null;
+
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.findElement(By.xpath(".//td[@class='center']//input")).getAttribute("value"));
             String lastName = element.findElement(By.xpath(".//td[2]")).getText();
             String firstName = element.findElement(By.xpath(".//td[3]")).getText();
-            contacts.add(new NewContactData().withId(id).withFirstName(firstName).withLastName(lastName));
+            contactCache.add(new NewContactData().withId(id).withFirstName(firstName).withLastName(lastName));
         }
-        return contacts;
+        return new Contacts(contactCache);
     }
 
     public void returnHome() {
@@ -96,6 +103,7 @@ public class ContactHelper extends HelperBase {
         openContactForEditingById(contact.getId());
         fillInContactData(contact);
         submitContactModification();
+        contactCache = null;
         returnHome();
     }
 
@@ -107,5 +115,6 @@ public class ContactHelper extends HelperBase {
     public void deleteContact(NewContactData contact) {
         selectContactById(contact.getId());
         deleteSelectedContact();
+        contactCache = null;
     }
 }
