@@ -80,6 +80,14 @@ public class NewContactData {
         return homePhone;
     }
 
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public String getWorkPhone() {
+        return workPhone;
+    }
+
     public String getEmail() {
         return email;
     }
