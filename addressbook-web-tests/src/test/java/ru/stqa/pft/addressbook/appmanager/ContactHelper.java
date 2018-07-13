@@ -117,4 +117,8 @@ public class ContactHelper extends HelperBase {
         deleteSelectedContact();
         contactCache = null;
     }
+
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
 }
