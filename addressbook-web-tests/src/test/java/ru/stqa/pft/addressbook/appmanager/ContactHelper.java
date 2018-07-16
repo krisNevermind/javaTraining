@@ -24,7 +24,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("lastname"), newContactData.getLastName());
         type(By.name("mobile"), newContactData.getHomePhone());
         type(By.name("email"), newContactData.getEmail());
-        type(By.name("photo"), newContactData.getPhoto().getAbsolutePath());
+        attach(By.xpath("//input[@name='photo']"), newContactData.getPhoto());
     }
 
     public void deleteSelectedContact() {

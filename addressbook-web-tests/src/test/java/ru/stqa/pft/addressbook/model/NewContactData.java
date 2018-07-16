@@ -158,6 +158,7 @@ public class NewContactData {
     }
 
     public File getPhoto() {
+
         return photo;
     }
 
