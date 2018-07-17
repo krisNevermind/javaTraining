@@ -30,10 +30,6 @@ public class GroupDataGenerator {
           return;
         }
         generator.run();
-   //     int count = Integer.parseInt(args[0]);
-   //     File file = new File(args[1]);
-
-
     }
 
     private void run() throws IOException {
