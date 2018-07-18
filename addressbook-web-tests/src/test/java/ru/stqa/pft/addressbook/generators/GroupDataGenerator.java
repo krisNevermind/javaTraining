@@ -43,13 +43,13 @@ public class GroupDataGenerator {
         } else if (format.equals("xml")){
             saveAsXml(groups, new File(file));
         } else {
-            System.out.println("Unrecognized format" + format);
+            System.out.println("Unrecognized format " + format);
         }
-
     }
 
     private void saveAsXml(List<GroupData> groups, File file) throws IOException {
         XStream xstream = new XStream();
+        xstream.processAnnotations(GroupData.class);
         String xml = xstream.toXML(groups);
         Writer writer = new FileWriter(file);
         writer.write(xml);
