@@ -29,35 +29,23 @@ public class ContactCreationTest extends TestBase {
         String line = reader.readLine();
         while (line != null){
             xml += line;
- //           String[] split = line.split(";");
- //           list.add(new Object[] {new NewContactData().withFirstName(split[0]).withLastName(split[1]).withEmail(split[2]).withMobilePhone(split[3]).withAddress(split[4])});
             line = reader.readLine();
         }
         XStream xstream = new XStream();
         xstream.processAnnotations(NewContactData.class);
         List<NewContactData> contacts = (List<NewContactData>) xstream.fromXML(xml);
         return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
-  //      return list.iterator();
     }
 
     @Test (dataProvider = "validContacts")
     public void testContactCreation(NewContactData contact) {
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         app.goTo().addNewContact();
         File photo = new File ("src/test/resources/picture.png");
         app.contact().createContact(contact);
         app.returnToHomePage();
         assertThat(app.contact().count(), equalTo(before.size() +1));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
     }
-
-    @Test (enabled = false)
-    public void testCurrentDir(){ File currentDir = new File(".");
-        System.out.println(currentDir.getAbsolutePath());
-        File photo = new File ("src/test/resources/picture.png");
-        System.out.println(photo.getAbsolutePath());
-        System.out.println(photo.exists());
-    }
-
 }
