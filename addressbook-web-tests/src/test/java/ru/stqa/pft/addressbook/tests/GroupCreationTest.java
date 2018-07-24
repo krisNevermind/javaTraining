@@ -25,37 +25,21 @@ public class GroupCreationTest extends TestBase {
         String line = reader.readLine();
         while (line != null){
             xml += line;
-  //          String[] split = line.split(";");
-  //          list.add(new Object[] {new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
             line = reader.readLine();
         }
         XStream xstream = new XStream();
         xstream.processAnnotations(GroupData.class);
         List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml);
         return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
- //       return list.iterator();
     }
 
     @Test (dataProvider = "validGroups")
     public void testGroupCreation(GroupData group) {
         app.goTo().groupPage();
-        Groups before = app.group().all();
+        Groups before = app.db().groups();;
         app.group().create(group);
         assertThat(app.group().count(), equalTo(before.size() + 1));
-        Groups after = app.group().all();
+        Groups after = app.db().groups();;
         assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
     }
-
-    @Test (enabled = false)
-    public void testBadGroupCreation() {
-
-        app.goTo().groupPage();
-        Groups before = app.group().all();
-        GroupData group = new GroupData().withName("testGroup1'");
-        app.group().create(group);
-        assertThat(app.group().count(), equalTo(before.size()));
-        Groups after = app.group().all();
-        assertThat(after, equalTo(before));
-    }
-
 }
