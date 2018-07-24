@@ -22,9 +22,10 @@ public class ContactHelper extends HelperBase {
     public void fillInContactData(NewContactData newContactData) {
         type(By.name("firstname"), newContactData.getFirstName());
         type(By.name("lastname"), newContactData.getLastName());
-        type(By.name("mobile"), newContactData.getHomePhone());
         type(By.name("email"), newContactData.getEmail());
-//        attach(By.xpath("//input[@name='photo']"), newContactData.getPhoto());
+        type(By.name("mobile"), newContactData.getMobilePhone());
+        type(By.name("address"), newContactData.getAddress());
+ //       attach(By.xpath("//input[@name='photo']"), newContactData.getPhoto());
     }
 
     public void deleteSelectedContact() {
