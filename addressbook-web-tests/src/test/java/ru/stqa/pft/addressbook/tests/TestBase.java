@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
+import net.bytebuddy.utility.RandomString;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.remote.BrowserType;
@@ -40,6 +41,12 @@ public class TestBase {
                     .map((g) -> new GroupData().withId(g.getId()).withName(g.getName()))
                     .collect(Collectors.toSet())));
         }
+    }
+
+    public String generateRandomPrefix(int length) {
+        RandomString text = new RandomString();
+        String randomText = text.make(length);
+        return randomText;
     }
 }
 

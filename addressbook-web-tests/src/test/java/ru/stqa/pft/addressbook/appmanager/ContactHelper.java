@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.NewContactData;
 
@@ -39,6 +40,10 @@ public class ContactHelper extends HelperBase {
 
     public void selectContactById(int id) {
         wd.findElement(By.cssSelector("input[value='"+id+"']")).click();
+    }
+
+    public void selectContactByFName(String contactPrefix) {
+        wd.findElement(By.xpath("//td[contains(text(), '"+contactPrefix+"')]//preceding-sibling::td[@class='center']//input")).click();
     }
 
     public void openContactForEditingById(int id) {
@@ -139,5 +144,20 @@ public class ContactHelper extends HelperBase {
         wd.navigate().back();
         return new NewContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
                 .withAddress(address).withEmail(email).withEmail2(email2).withEmail3(email3);
+    }
+
+    public void selectGroupForAssignment(String groupName){
+        Select ddl = new Select(wd.findElement(By.name("to_group")));
+        ddl.selectByVisibleText(groupName);
+        wd.findElement(By.name("add")).click();
+    }
+
+    public void selectGroupToViewAssignments(String groupName){
+        Select ddl = new Select(wd.findElement(By.name("group")));
+        ddl.selectByVisibleText(groupName);
+    }
+
+    public void removeContactFromGroup(){
+        wd.findElement(By.xpath("//input[contains(@value, 'Remove from')]")).click();
     }
 }
