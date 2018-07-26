@@ -42,4 +42,14 @@ public class DbHelper {
         session.close();
         return new Contacts(result);
     }
+
+    public Groups getAssignedGroups(String firstname){
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<GroupData> result = session.createQuery("select contacts.groups from NewContactData contacts where contacts.firstName = :firstname")
+                .setParameter("firstname", firstname).list();
+        session.getTransaction().commit();
+        session.close();
+        return new Groups (result);
+    }
 }

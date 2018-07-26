@@ -217,13 +217,14 @@ public class NewContactData {
                 Objects.equals(lastName, that.lastName) &&
                 Objects.equals(mobilePhone, that.mobilePhone) &&
                 Objects.equals(email, that.email) &&
-                Objects.equals(address, that.address);
+                Objects.equals(address, that.address) &&
+                Objects.equals(groups, that.groups);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, firstName, lastName, mobilePhone, email, address);
+        return Objects.hash(id, firstName, lastName, mobilePhone, email, address, groups);
     }
 }
 
