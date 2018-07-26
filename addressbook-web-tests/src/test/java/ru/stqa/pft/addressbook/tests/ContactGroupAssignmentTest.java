@@ -1,6 +1,8 @@
 package ru.stqa.pft.addressbook.tests;
 
 import net.bytebuddy.utility.RandomString;
+import org.hamcrest.MatcherAssert;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.Contacts;
@@ -23,7 +25,7 @@ public class ContactGroupAssignmentTest extends TestBase {
             app.goTo().groupPage();
             GroupData groupForAssignment = new GroupData();
             String randomGroupPrefix = generateRandomPrefix(15);
-            app.group().create(groupForAssignment.withId(groupForAssignment.getId()).withName("Group_"+randomGroupPrefix).withHeader("header").withFooter("footer"));
+            app.group().create(groupForAssignment.withName("Group_"+randomGroupPrefix).withHeader("header").withFooter("footer"));
 
             //create new contact with a unique first name
             app.contact().returnHome();
@@ -42,7 +44,7 @@ public class ContactGroupAssignmentTest extends TestBase {
             //get list of groups assigned to contact
             Groups assignedGroupsAdded = app.db().getAssignedGroups("Contact_"+randomFNamePrefix);
 
-            //verification
+            //verification #1
             assertThat(assignedGroupsAdded, equalTo(assignedGroupsOriginal.withAdded(groupForAssignment)));
 
             //remove contact from group
@@ -53,7 +55,7 @@ public class ContactGroupAssignmentTest extends TestBase {
             //get list of groups assigned to contact
             Groups assignedGroupsRemoved = app.db().getAssignedGroups("Contact_"+randomFNamePrefix);
 
-            //verification
-            assertThat(assignedGroupsAdded, equalTo(assignedGroupsOriginal.without(groupForAssignment)));
+            //verification #2
+            assertThat(assignedGroupsRemoved, equalTo(assignedGroupsOriginal.without(groupForAssignment)));
         }
 }
