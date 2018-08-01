@@ -16,13 +16,14 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
 
     private final Properties properties;
-    private WebDriver wd;
+    WebDriver wd;
 
     private String browser;
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
     private MailHelper mailHelper;
     private JamesHelper jamesHelper;
+    private PasswordHelper passwordHelper;
 
     public ApplicationManager(String browser){
         this.browser = browser;
@@ -91,4 +92,10 @@ public class ApplicationManager {
         }
         return jamesHelper;
     }
+
+    public PasswordHelper passwordHelper() {
+        if (passwordHelper == null){
+            passwordHelper = new PasswordHelper(this);
+        }
+        return passwordHelper; }
 }

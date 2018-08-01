@@ -16,10 +16,11 @@ public class RegistrationHelper extends HelperBase {
         click(By.xpath("//input[@value='Signup']"));
     }
 
-    public void finish(String confirmationLink, String password) {
+    public void resetPassword(String confirmationLink, String password) {
         wd.get(confirmationLink);
         type(By.name("password"), password);
         type(By.name("password_confirm"), password);
         click(By.xpath("//span[text()='Update User']"));
+
     }
 }
