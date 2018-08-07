@@ -13,12 +13,13 @@ import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
 
-public class RestTests {
+public class RestTests extends TestBase{
 
     @Test
     public void testCreateIssue() throws IOException {
+    skipIfNotFixed(72);
     Set<Issue> oldIssues = getIssues();
-    Issue newIssue = new Issue().withSubject("Test issue").withDescription("New test issue");
+    Issue newIssue = new Issue().withSubject("Test issue NEW2").withDescription("New test issue");
     int issueId = createIssue(newIssue);
     Set<Issue> newIssues = getIssues();
     oldIssues.add(newIssue.withId(issueId));
@@ -27,16 +28,11 @@ public class RestTests {
 
 
     private Set<Issue> getIssues() throws IOException {
-        String json = getExecutor().execute(org.apache.http.client.fluent.Request.Get("http://bugify.stqa.ru/api/issues.json"))
+        String json = getExecutor().execute(org.apache.http.client.fluent.Request.Get("http://bugify.stqa.ru/api/issues.json?limit=100"))
                 .returnContent().asString();
         JsonElement parsed = new JsonParser().parse(json);
         JsonElement issues = parsed.getAsJsonObject().get("issues");
         return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
-    }
-
-
-    private Executor getExecutor(){
-    return Executor.newInstance().auth("288f44776e7bec4bf44fdfeb1e646490", "");
     }
 
     private int createIssue(Issue newIssue) throws IOException {
@@ -47,6 +43,4 @@ public class RestTests {
         JsonElement parsed = new JsonParser().parse(json);
         return parsed.getAsJsonObject().get("issue_id").getAsInt();
     }
-
-
 }
