@@ -6,7 +6,6 @@
     <test name="Jenkins" >
         <classes>
             <class name="ru.stqa.pft.addressbook.tests.ContactDeletionTest" />
-            <class name="ru.stqa.pft.addressbook.tests.ContactModificationTest" />
         </classes>
     </test>
 
