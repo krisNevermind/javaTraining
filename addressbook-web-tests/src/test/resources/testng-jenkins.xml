@@ -6,6 +6,9 @@
     <test name="Jenkins" >
         <classes>
             <class name="ru.stqa.pft.addressbook.tests.ContactDeletionTest" />
+            <class name="ru.stqa.pft.addressbook.tests.AddContactToGroupTest" />
+            <class name="ru.stqa.pft.addressbook.tests.RemoveContactFromGroup" />
+
         </classes>
     </test>
 
